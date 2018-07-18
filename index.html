@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>SQL Reference</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" data-target="#list-example">
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
+    crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="home.css">
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="jumbotron">
+      <h1 class="text-muted">Oracle SQL Reference</h1>
+    </div>
+  </div>
+
+  <div class="container mb-4">
+    <div class="row">
+      <div class="col-2">
+        <nav id="list-example" class="navbar navbar-light bg-light">
+          <a class="navbar-brand" href="#">Reference</a>
+          <nav class="nav nav-pills flex-column">
+            <a class="nav-link" href="#item-ddl">DDL</a>
+            <nav class="nav nav-pills flex-column">
+              <a class="nav-link ml-3 my-0 subheadings" href="#item-ddl-create">Create</a>
+              <a class="nav-link ml-3 my-0 subheadings" href="#item-ddl-drop">Drop</a>
+              <a class="nav-link ml-3 my-0 subheadings" href="#item-ddl-truncate">Truncate</a>
+              <a class="nav-link ml-3 my-0 subheadings" href="#item-ddl-alter">Alter</a>
+              <!-- <a class="nav-link ml-3 my-0 subheadings" href="#item-ddl-comment">Comment</a> -->
+              <a class="nav-link ml-3 my-0 subheadings" href="#item-ddl-rename">Rename</a>
+            </nav>
+            <a class="nav-link" href="#item-dml">DML</a>
+            <nav class="nav nac-pills flex-column">
+              <a class="nav-link ml-3 my-0 subheadings" href="#item-dml-select">Select</a>
+              <a class="nav-link ml-3 my-0 subheadings" href="#item-dml-insert">Insert</a>
+              <a class="nav-link ml-3 my-0 subheadings" href="#item-dml-update">Update</a>
+              <a class="nav-link ml-3 my-0 subheadings" href="#item-dml-delete">Delete</a>
+            </nav>
+            <a class="nav-link" href="#item-dcl">DCL</a>
+            <nav class="nav nav-pills flex-column">
+              <a class="nav-link ml-3 my-0" href="#item-dcl-grant">Grant</a>
+              <a class="nav-link ml-3 my-0" href="#item-dcl-revoke">revoke</a>
+            </nav>
+          </nav>
+        </nav>
+      </div>
+
+      <div class="col-10 mb-4">
+        <div data-spy="scroll" id="content" data-offset="0">
+          <!-- DDL -->
+          <!-- Create -->
+          <h4 id="item-ddl-create" class="content-heading">Create</h4>
+          <div class="ml-4">
+            <h5>Create Database</h5>
+            <code>
+              <span class="code">create database</span> database_name</code>
+
+            <h5>Create Table</h5>
+            <code>
+              <span class="code">CREATE TABLE</span> table_name
+              <br> (
+              <br> column1
+              <span class="code">data_type(size)</span>,
+              <br> column2
+              <span class="code">data_type(size)</span>,
+              <br> column3
+              <span class="code">data_type(size)</span>,
+              <br> ....
+              <br> );
+              <br>
+            </code>
+            <h6>Example</h6>
+            <code>
+              <span class="code">CREATE TABLE</span> Students
+              <br> (
+              <br> ROLL_NO
+              <span class="code">int(3)</span>,
+              <br> NAME
+              <span class="code">varchar(20)</span>,
+              <br> SUBJECT
+              <span class="code">varchar(20)</span>,
+              <br> );
+              <br>
+            </code>
+          </div>
+
+          <!-- Drop -->
+          <h4 id="item-ddl-drop" class="content-heading">Drop</h4>
+          <div class="ml-4">
+            <h5>Drop Databse</h5>
+            <code>
+              <span class="code">DROP TABLE</span> table_name;</code>
+            <h5>Drop column</h5>
+            <code>
+              <span class="code">DROP DATABASE</span> database_name;</code>
+          </div>
+
+          <!-- Truncate -->
+          <h4 class="content-heading" id="item-ddl-truncate">Truncate</h4>
+          <div class="ml-4">
+            <code>
+              <span class="code">TRUNCATE TABLE </span>table_name</code>
+            <h5>Drop vs Truncate</h5>
+            <ol>
+              <li>Truncate is normally ultra-fast and its ideal for deleting data from a temporary table.</li>
+              <li>Truncate preserves the structure of the table for future use, unlike drop table where the table is deleted
+                with its full structure.</li>
+              <li>Table or Database deletion using DROP statement cannot be rolled back, so it must be used wisely.</li>
+            </ol>
+          </div>
+
+          <!-- Alter -->
+          <h4 class="content-heading" id="item-ddl-alter">Alter</h4>
+          <div class="ml-4">
+            <h5>Add</h5>
+            <code>
+              <span class="code">ALTER TABLE</span> table_name
+              <br>
+              <span class="code">ADD</span> (Columnname_1 datatype(size),
+              <br> Columnname_2 datatype(size),
+              <br> …
+              <br> Columnname_n datatype(size));
+              <br>
+            </code>
+
+            <h5>Drop</h5>
+            <code>
+              <span class="code">ALTER TABLE</span> table_name
+              <br>
+              <span class="code">DROP COLUMN</span> column_name;
+              <br>
+            </code>
+
+            <h5>Modify</h5>
+            <code>
+              <span class="code">ALTER TABLE</span> table_name
+              <br>
+              <span class="code">MODIFY</span> column_name column_type;
+              <br>
+            </code>
+          </div>
+
+          <!-- Rename -->
+          <h4 class="content-heading" id="item-ddl-rename">Rename</h4>
+          <div class="ml-4">
+            <h5>Table</h5>
+            <code>
+              <span class="code">ALTER TABLE</span> table_name
+              <br>
+              <span class="code">RENAME TO</span> new_table_name;
+            </code>
+            <h5>Column</h5>
+            <code>
+              <span class="code">ALTER TABLE</span> table_name
+              <br>
+              <span class="code">RENAME COLUMN</span> old_name
+              <span class="code">TO</span> new_name
+              <br>
+            </code>
+          </div>
+
+
+
+          <!-- DML -->
+          <!-- Select -->
+          <h4 id="item-dml-select" class="content-heading">Select</h4>
+          <div class="ml-4">
+            <code>
+              <span class="code">SELECT</span> column1,column2
+              <span class="code">FROM</span> table_name </code>
+
+            <h5>Select Distinct</h5>
+            <code>
+              <span class="code">SELECT DISTINCT</span> column1, column2, ...
+              <span class="code">FROM</span> table_name; </code>
+
+            <h6>Count the distinct values</h6>
+            <code>
+              <span class="code">SELECT COUNT</span>(
+              <span class="code">DISTINCT</span> column_name)
+              <span class="code">FROM</span> table_name; </code>
+
+            <h5>WHERE clause</h5>
+            <code>
+              <span class="code">SELECT</span> column1, column2, ...
+              <span class="code">FROM</span> table_name
+              <span class="code">WHERE</span> condition;</code>
+            <h6>Possible operators in where</h6>
+            <ul>
+              <li>=</li>
+              <li>
+                <>
+              </li>
+              <li>>=</li>
+              <li>
+                <=</li>
+                  <li>BETWEEN</li>
+                  <li>LIKE</li>
+                  <li>IN</li>
+                  <li>AND</li>
+                  <li>OR</li>
+                  <li>NOT</li>
+            </ul>
+            <p>
+              <strong>Note: </strong>AND, OR, NOT can be combined with brakets.</p>
+
+            <h5>The LIKE Command</h5>
+            <ul>
+              <li>% - The percent sign represents zero, one, or multiple characters</li>
+              <li>_ - The underscore represents a single character</li>
+            </ul>
+            <p>
+              <strong>Note: </strong>LIKE can be combined with NOT, AND, OR. Example:
+              <code>
+                <span class="code">SELECT</span> *
+                <span class="code">FROM</span> table_name
+                <span class="code">WHERE</span> column_name
+                <span class="code">NOT</span>
+                <span class="code">LIKE</span> 'a%'; </code>
+            </p>
+            <h5>ORDER BY</h5>
+              <code>
+                <span class="code">SELECT</span> column1, column2, ...
+                <span class="code">FROM</span> table_name
+                <span class="code">ORDER BY</span> column1, column2, ...
+                <span class="code">ASC|DESC</span>; </code>
+              <h6>For several Columns</h6>
+              <code>
+                <span class="code">SELECT</span> *
+                <span class="code">FROM</span> Customers
+                <span class="code">ORDER BY</span> Country
+                <span class="code">ASC</span>, CustomerName
+                <span class="code">DESC</span>;</code>
+          </div>
+
+
+          <!-- Insert -->
+          <h4 id="item-dml-insert" class="content-heading">Insert</h4>
+          <div class="ml-4">
+            <h6>Values only:</h6>
+            <code>
+              <span class="code">INSERT INTO</span> table_name
+              <span class="code">VALUES</span> (value1, value2, value3,...);</code>
+
+            <h6>Columns and Values:</h6>
+            <code>
+              <span class="code">INSERT INTO</span> table_name (column1, column2, column3,..)
+              <span class="code">VALUES</span> ( value1, value2, value3,..);</code>
+
+            <h5>Insert from another Table</h5>
+            <h6>Copy all columns</h6>
+            <code>
+              <span class="code">INSERT INTO</span> first_table
+              <span class="code">SELECT</span> *
+              <span class="code">FROM</span> second_table;</code>
+
+            <h6>Copy specific columns</h6>
+            <code>
+              <span class="code">INSERT INTO</span> first_table(column1, column2, ...)
+              <span class="code">SELECT</span> column1, column2, ...
+              <span class="code">FROM</span> second_table;</code>
+
+            <h6>Copy with condition</h6>
+            <code>
+              <span class="code">INSERT INTO</span> table1
+              <span class="code">SELECT</span> *
+              <span class="code">FROM</span> table2
+              <span class="code">WHERE</span> condition;</code>
+          </div>
+
+          <!-- Update -->
+          <h4 id="item-dml-update" class="content-heading">Update</h4>
+          <div class="ml-4">
+            <code><span class="code">UPDATE</span> table_name SET column1 = value1, column2 = value2,...
+              <span class="code">WHERE</span> condition;</code>
+            <p>
+              <strong>Note: </strong>If you miss to put the where command, all tuples will be updated!</p>
+          </div>
+
+          <!-- Delete -->
+          <h4 id="item-dml-delete" class="content-heading">Delete</h4>
+          <div class="ml-4">
+            <code><span class="code">DELETE FROM</span> table_name
+              <span class="code">WHERE</span> some_condition;</code>
+            <p>
+              <strong>Note: </strong>If you miss to put the where command, all tuples will be deleted!</p>
+            <h5>Delete All Tuples</h5>
+            <code><span class="code"> </span>DELETE FROM</span> table_name;</code>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $('#content').scrollspy({
+      target: '#list-example'
+    });
+    $("#content").css({
+      "height": window.innerHeight
+    });
+  </script>
+</body>
+
+</html>

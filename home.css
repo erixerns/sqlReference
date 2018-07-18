@@ -1,0 +1,30 @@
+body{
+  position:relative;
+}
+
+#list-example{
+  width:100px;
+}
+
+#content{
+  overflow-y: scroll;
+}
+
+.code{
+  color: blue;
+  font-style: italic;
+  text-transform:uppercase;
+}
+
+.content-heading{
+  /* Change the font */
+  text-transform:uppercase;
+  margin-top: 50px;
+}
+
+h4{
+  text-decoration-line: underline;
+}
+h5, h6{
+  color:grey;
+}
