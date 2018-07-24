@@ -26,6 +26,7 @@
 
   <div class="container mb-4">
     <div class="row">
+      <!-- Navbar -->
       <div class="col-2">
         <nav id="list-example" class="navbar navbar-light bg-light">
           <a class="navbar-brand" href="#">Reference</a>
@@ -62,9 +63,7 @@
           <h4 id="item-ddl-create" class="content-heading">Create</h4>
           <div class="ml-4">
             <h5>Create Database</h5>
-            <code>
-              <span class="code">create database</span> database_name</code>
-
+            <code><span class="code">create database</span> database_name</code>
             <h5>Create Table</h5>
             <code>
               <span class="code">CREATE TABLE</span> table_name
@@ -92,6 +91,84 @@
               <br> );
               <br>
             </code>
+          </div>
+          <!-- create table stu_cse(regno number(4), ccode number(5), constraint fks foreign key(regno) references stud, constraint fkc foreign key(ccode) references code)); -->
+          <!-- SQL Constraints -->
+          <h4>SQL Constraints</h4>
+          <div class="ml-4">
+            <!-- NOT NULL -->
+            <h5>NOT NULL</h5>
+            <p>The NOT NULL constraint enforces a column to NOT accept NULL values.</p>
+            <h6>While creating table</h6>
+            <code>
+                CREATE TABLE Persons (<br>
+                  ID int NOT NULL,<br>
+                  LastName varchar(255) NOT NULL,<br>
+                  FirstName varchar(255) NOT NULL,<br>
+                  Age int<br>
+              );
+            </code>
+            <h6>Add to existing table</h6>
+            <code>ALTER TABLE table_name MODIFY column_name datatype NOT NULL;</code>
+            <h6>Drop NOT NULL</h6>
+            <code>ALTER TABLE table_name MODIFY column_name datatype NULL;</code>
+
+            <!-- UNIQUE -->
+            <h5>UNIQUE</h5>
+            <p>The UNIQUE constraint ensures that all values in a column are different.</p>
+            <h6>Adding to an existing table</h6>
+            <code>
+              create table studs1(<br>
+                regno number(12),<br>
+                name varchar2(10),<br>
+                city varchar2(7), <br>
+                constraint mynuique unique(name)<br>
+              );
+            </code>
+            <h6>Adding to existing table</h6>
+            <code>ALTER TABLE table_name ADD CONSTRAINT MyUniqueConstraint UNIQUE(column1, column2...);</code>
+            <h6>Droping Unique Contraint</h6>
+            <code>ALTER TABLE table_name DROP CONSTRAINT MyUniqueConstraint;</code>
+
+            <!-- DEFAULT -->
+            <h5>DEFAULT</h5>
+            <p>The DEFAULT constraint is used to provide a default value for a column.</p>
+            <h6>While creating a table</h6>
+            <code>
+                CREATE TABLE CUSTOMERS(<br>
+                  ID INT NOT NULL,<br>
+                  NAME VARCHAR (20) NOT NULL,<br>
+                  AGE INT NOT NULL,<br>
+                  ADDRESS CHAR (25) ,<br>
+                  SALARY DECIMAL (18, 2) DEFAULT 5000.00, <br>
+                  PRIMARY KEY (ID)<br>
+                );
+            </code>
+            <h6>Add to and existing table</h6>
+            <code>ALTER TABLE CUSTOMERS MODIFY SALARY DECIMAL (18, 2) DEFAULT 5000.00;</code>
+            <h6>Drop the default contraint</h6>
+            <code>ALTER TABLE constomers MODIFY age DEFAULT NULL;</code>
+
+            <!-- CHECK -->
+            <h5>CHECK</h5>
+            <p>The CHECK constraint is used to limit the value range that can be placed in a column.</p>
+            <h6>While Creating the Table</h6>
+            <code>
+                create table stu(<br>
+                  name varchar2(10) not null, <br>
+                  studid varchar2(5), <br>
+                  degreelevel varchar2(15), <br>
+                  primary key(studid), <br>
+                  check(degreelevel in('Bachelors','Masters','Doctorate'))<br>
+                );<br>
+            </code>
+            <h6>Adding to exisiting table</h6>
+            <code>ALTER TABLE Persons ADD CONSTRAINT CHK_PersonAge CHECK (Age>=18 AND City='Sandnes');</code>
+            <h6>Droping the Contraint</h6>
+            <code>ALTER TABLE Persons DROP CONSTRAINT CHK_PersonAge;</code>
+
+            <!-- PRIMARY KEY -->
+            <h4>PRIMARY KEY</h4>
           </div>
 
           <!-- Drop -->
